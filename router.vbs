@@ -9,7 +9,7 @@ ExecQuery("select Replysize from Win32_PingStatus where address = '" & strComput
 For Each objStatus in objPing
 If IsNull(objStatus.ReplySize) Then
 PcOnline=False
-'Пишем Лог файл
+'Create log file.
 Set fso = CreateObject("Scripting.FileSystemObject")
 If (fso.FileExists("d:\routerlog.txt")) Then
 Set tf = fso.OpenTextFile("d:\routerlog.txt",ForAppending, True)
@@ -24,7 +24,7 @@ tf.Close()
 Set fso = Nothing
 Set tf = Nothing
 End If
-' Конец Лог файла
+'Check access internet
 Else
 PcOnline = True
 'Wscript.Echo strComputer & " is responding to a ping "
@@ -38,7 +38,7 @@ Const ForReading = 1, ForWriting = 2, ForAppending = 8
 If PcOnline("www.ya.ru")_
 OR PcOnline("www.google.com")_
 Then
-' если статус = 0, пустая строка — другое
+'Write log, run reeboot
 Wscript.Echo "all ok"
 Set fsot = CreateObject("Scripting.FileSystemObject")
 Set tft = fsot.OpenTextFile("d:\routerlog.txt",ForAppending, True)
